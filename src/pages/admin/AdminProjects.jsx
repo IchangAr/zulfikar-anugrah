@@ -9,6 +9,8 @@ const AdminProjects = () => {
   const [editingId, setEditingId] = useState(null);
   const [saving, setSaving] = useState(false);
   const [savingOrder, setSavingOrder] = useState(false);
+  const [uploadingThumbnail, setUploadingThumbnail] = useState(false);
+  const [uploadingGallery, setUploadingGallery] = useState(false);
 
   // Form State
   const [formData, setFormData] = useState({
@@ -48,6 +50,42 @@ const AdminProjects = () => {
       console.error('Error fetching projects:', error);
     }
     setLoading(false);
+  };
+
+  const handleThumbnailUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setUploadingThumbnail(true);
+    try {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `project-thumb-${Date.now()}.${fileExt}`;
+      const { error: uploadError } = await supabase.storage.from('portfolio').upload(fileName, file);
+      if (uploadError) throw uploadError;
+      const { data } = supabase.storage.from('portfolio').getPublicUrl(fileName);
+      setFormData(prev => ({ ...prev, thumbnail_url: data.publicUrl }));
+    } catch (err) {
+      alert('Gagal mengunggah thumbnail: ' + err.message);
+    } finally {
+      setUploadingThumbnail(false);
+    }
+  };
+
+  const handleGalleryUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setUploadingGallery(true);
+    try {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `project-gallery-${Date.now()}.${fileExt}`;
+      const { error: uploadError } = await supabase.storage.from('portfolio').upload(fileName, file);
+      if (uploadError) throw uploadError;
+      const { data } = supabase.storage.from('portfolio').getPublicUrl(fileName);
+      setFormData(prev => ({ ...prev, image_urls: [...prev.image_urls, data.publicUrl] }));
+    } catch (err) {
+      alert('Gagal mengunggah foto: ' + err.message);
+    } finally {
+      setUploadingGallery(false);
+    }
   };
 
   const handleInputChange = (e) => {
@@ -286,8 +324,14 @@ const AdminProjects = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block mb-2 text-sm font-medium text-slate-700">Thumbnail URL</label>
-                    <input type="text" name="thumbnail_url" value={formData.thumbnail_url} onChange={handleInputChange} className="w-full p-3 rounded-lg bg-white/50 border-slate-300/50 text-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none transition-all" />
+                    <label className="block mb-2 text-sm font-medium text-slate-700">Thumbnail (URL atau Upload File)</label>
+                    <div className="flex flex-col gap-2">
+                      <input type="text" name="thumbnail_url" value={formData.thumbnail_url} onChange={handleInputChange} placeholder="https://... atau pilih file di bawah" className="w-full p-3 rounded-lg bg-white/50 border-slate-300/50 text-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none transition-all" />
+                      <div className="flex items-center gap-2">
+                        <input type="file" accept="image/*" onChange={handleThumbnailUpload} disabled={uploadingThumbnail} className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-all" />
+                        {uploadingThumbnail && <span className="text-xs text-blue-500 whitespace-nowrap animate-pulse">Mengunggah...</span>}
+                      </div>
+                    </div>
                   </div>
                   <div>
                     <label className="block mb-2 text-sm font-medium text-slate-700">Tags / Teknologi (Pisah dg koma)</label>
@@ -328,12 +372,12 @@ const AdminProjects = () => {
                   )}
 
                   {/* Add Image Input */}
-                  <div className="flex gap-2">
+                  <div className="flex flex-col sm:flex-row gap-3">
                     <input 
                       type="text" 
                       value={newImageUrl} 
                       onChange={(e) => setNewImageUrl(e.target.value)} 
-                      placeholder="https://... (Paste URL gambar baru di sini)" 
+                      placeholder="https://... (Paste URL gambar)" 
                       className="flex-grow p-3 rounded-lg bg-white/50 border-slate-300/50 text-slate-800 focus:border-blue-500 focus:outline-none transition-all text-sm" 
                     />
                     <button 
@@ -346,8 +390,19 @@ const AdminProjects = () => {
                       }}
                       className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors whitespace-nowrap text-sm"
                     >
-                      + Tambah Foto
+                      + Tambah URL
                     </button>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm text-slate-500">atau</span>
+                      <label className={`px-4 py-2 ${uploadingGallery ? 'bg-slate-300 text-slate-500 cursor-not-allowed' : 'bg-emerald-600 hover:bg-emerald-700 text-white cursor-pointer'} rounded-lg font-medium transition-colors whitespace-nowrap text-sm flex items-center gap-2`}>
+                        {uploadingGallery ? (
+                           <><svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Mengunggah...</>
+                        ) : (
+                           <>+ Upload File</>
+                        )}
+                        <input type="file" accept="image/*" className="hidden" onChange={handleGalleryUpload} disabled={uploadingGallery} />
+                      </label>
+                    </div>
                   </div>
                 </div>
 
