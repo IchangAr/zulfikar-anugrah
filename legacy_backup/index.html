@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cank — Full-Stack Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="Logo Iccank.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <div class="blob-layer">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+  <div class="noise"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="#home" class="logo"><img src="Logo Iccank.png" alt="Iccank Logo"
+          style="height: 4.5em; vertical-align: middle; margin: -1em 0;"></a>
+      <ul class="nav-links">
+        <li><a href="#about" data-nav>Tentang</a></li>
+        <li><a href="#projects" data-nav>Project</a></li>
+        <li><a href="#experience" data-nav>Pengalaman</a></li>
+        <li><a href="#achievements" data-nav>Pencapaian</a></li>
+        <li><a href="#certificates" data-nav>Sertifikat</a></li>
+        <li><a href="#contact" data-nav>Kontak</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="#contact" class="btn btn-ghost btn-sm">Hubungi Saya</a>
+      </div>
+      <button class="menu-toggle" aria-label="Menu">☰</button>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow reveal reveal-up delay-100"><span class="dot"></span> Tersedia untuk project baru</div>
+          <h1 class="reveal reveal-up delay-200"><span id="heroRoleText">Membangun produk digital yang rapi, cepat, dan
+              elegan.</span></h1>
+          <p id="heroBioShortText" class="reveal reveal-up delay-300">Saya Cank, Full-Stack Developer yang fokus pada
+            detail interaksi kecil yang membuat
+            sebuah produk terasa
+            premium — dari sistem desain hingga baris kode terakhir.</p>
+          <div class="hero-actions reveal reveal-up delay-400">
+            <a href="#projects" class="btn btn-primary">Lihat Project →</a>
+            <a href="#contact" class="btn btn-ghost" id="heroCvBtn">Unduh CV</a>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal reveal-scale delay-500">
+          <div class="hero-card hero-card-main glass" id="heroAvatarContainer">
+            <div class="hero-avatar" id="heroAvatar">C</div>
+          </div>
+          <div class="floating-chip chip-1 glass">
+            <div class="chip-icon" style="background:rgba(34,197,94,.15);color:var(--c-success);">✓</div>Siap bekerja
+          </div>
+          <div class="floating-chip chip-2 glass">
+            <div class="chip-icon" style="background:rgba(59,130,246,.15);color:var(--c-primary);">⌘</div>Full-Stack
+          </div>
+          <div class="floating-chip chip-3 glass">
+            <div class="chip-icon" style="background:rgba(139,92,246,.15);color:var(--c-accent);">★</div>📍 Makassar,
+            Indonesia
+          </div>
+
+        </div>
+      </div>
+      <div class="scroll-cue"><span>Scroll</span>
+        <div class="line"></div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="about-v2">
+          <!-- Centered Greeting Badge -->
+          <div class="section-head reveal reveal-up" style="margin-bottom: 0;">
+            <div class="about-greeting-badge">
+              <span class="greeting-wave"></span> Halo, perkenalkan!
+            </div>
+          </div>
+
+          <!-- Top Row: Left Bio + Right Principle -->
+          <div class="about-v2-top reveal reveal-up">
+            <div class="about-v2-left">
+              <h2 class="about-v2-name">Baso Ummul Ikshan.</h2>
+              <p class="about-v2-subtitle">Fresh Graduate Informatika</p>
+              <div class="about-v2-bio" id="aboutBioLongText">
+                <p>Saya adalah Fresh Graduate Informatika yang senang membangun solusi digital berbasis web dan data.
+                  Selama mengerjakan berbagai proyek akademik, organisasi, dan freelance, saya mengembangkan aplikasi
+                  full-stack, sistem automasi, serta solusi berbasis Machine Learning dan IoT. Saya percaya teknologi
+                  yang baik bukan hanya berjalan dengan benar, tetapi juga memberikan dampak nyata bagi pengguna.</p>
+              </div>
+            </div>
+            <div class="about-v2-right">
+              <div class="principle-card-v2 glass">
+                <div class="principle-card-header">
+                  <div class="principle-icon-circle">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                      <line x1="12" y1="17" x2="12.01" y2="17" />
+                    </svg>
+                  </div>
+                  <h3 class="principle-title-v2">Prinsip Saya</h3>
+                </div>
+                <div class="principle-quote-v2">
+                  <span class="quote-mark quote-open">"</span>
+                  <p>Saya percaya perangkat lunak yang baik bukan hanya berfungsi dengan benar, tetapi juga mudah
+                    dipelajari, mudah dipelihara, dan memberikan nilai nyata bagi penggunanya.</p>
+                  <span class="quote-mark quote-close">"</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Credential Chips -->
+          <div class="about-v2-credentials reveal reveal-up">
+            <div class="credential-chip glass">
+              <span class="credential-icon">🎓</span>
+              <span>Universitas Muslim Indonesia • IPK 3.95</span>
+            </div>
+            <div class="credential-chip glass">
+              <span class="credential-icon">🚀</span>
+              <span>Bangkit Academy Graduate</span>
+            </div>
+            <div class="credential-chip glass">
+              <span class="credential-icon">🏅</span>
+              <span>BNSP Associate Data Scientist</span>
+            </div>
+          </div>
+
+          <!-- Skills Section -->
+          <div class="about-v2-skills reveal reveal-up">
+            <div class="skills-section-title">
+              <h3>Keahlian & Tools</h3>
+            </div>
+            <div class="skills-grid-v2">
+              <div class="skill-card-v2 glass">
+                <div class="skill-card-inner">
+                  <div class="skill-icon-circle" style="background: linear-gradient(135deg, #3b82f6, #60a5fa);">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="16 18 22 12 16 6" />
+                      <polyline points="8 6 2 12 8 18" />
+                    </svg>
+                  </div>
+                  <div class="skill-card-text">
+                    <h4>CORE TECH</h4>
+                    <p>Laravel • PHP • REST API</p>
+                  </div>
+                </div>
+                <span class="skill-card-arrow">›</span>
+              </div>
+
+              <div class="skill-card-v2 glass">
+                <div class="skill-card-inner">
+                  <div class="skill-icon-circle" style="background: linear-gradient(135deg, #6366f1, #818cf8);">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <ellipse cx="12" cy="5" rx="9" ry="3" />
+                      <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+                      <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+                    </svg>
+                  </div>
+                  <div class="skill-card-text">
+                    <h4>DATABASES</h4>
+                    <p>MySQL • Supabase • Firebase</p>
+                  </div>
+                </div>
+                <span class="skill-card-arrow">›</span>
+              </div>
+
+              <div class="skill-card-v2 glass">
+                <div class="skill-card-inner">
+                  <div class="skill-icon-circle" style="background: linear-gradient(135deg, #ec4899, #f472b6);">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                      <line x1="8" y1="21" x2="16" y2="21" />
+                      <line x1="12" y1="17" x2="12" y2="21" />
+                    </svg>
+                  </div>
+                  <div class="skill-card-text">
+                    <h4>FRONTEND</h4>
+                    <p>HTML • CSS • JavaScript • Tailwind CSS</p>
+                  </div>
+                </div>
+                <span class="skill-card-arrow">›</span>
+              </div>
+
+              <div class="skill-card-v2 glass">
+                <div class="skill-card-inner">
+                  <div class="skill-icon-circle" style="background: linear-gradient(135deg, #f97316, #fb923c);">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <path
+                        d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+                    </svg>
+                  </div>
+                  <div class="skill-card-text">
+                    <h4>DEV TOOLS</h4>
+                    <p>Git • GitHub • VS Code • Postman • Figma</p>
+                  </div>
+                </div>
+                <span class="skill-card-arrow">›</span>
+              </div>
+
+              <div class="skill-card-v2 glass">
+                <div class="skill-card-inner">
+                  <div class="skill-icon-circle" style="background: linear-gradient(135deg, #14b8a6, #2dd4bf);">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M5 12.55a11 11 0 0 1 14.08 0" />
+                      <path d="M1.42 9a16 16 0 0 1 21.16 0" />
+                      <path d="M8.53 16.11a6 6 0 0 1 6.95 0" />
+                      <line x1="12" y1="20" x2="12.01" y2="20" />
+                    </svg>
+                  </div>
+                  <div class="skill-card-text">
+                    <h4>IOT</h4>
+                    <p>ESP32 • Arduino IDE • Blynk</p>
+                  </div>
+                </div>
+                <span class="skill-card-arrow">›</span>
+              </div>
+
+              <div class="skill-card-v2 glass">
+                <div class="skill-card-inner">
+                  <div class="skill-icon-circle" style="background: linear-gradient(135deg, #8b5cf6, #a78bfa);">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                      <path d="M2 17l10 5 10-5" />
+                      <path d="M2 12l10 5 10-5" />
+                    </svg>
+                  </div>
+                  <div class="skill-card-text">
+                    <h4>AI & DATA</h4>
+                    <p>Python • Scikit-learn • TensorFlow</p>
+                  </div>
+                </div>
+                <span class="skill-card-arrow">›</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="projects">
+      <div class="container">
+        <div class="section-head reveal reveal-up">
+          <div class="eyebrow">Project Pilihan</div>
+          <h2>Eksplorasi & Studi Kasus</h2>
+        </div>
+        <div class="project-grid" id="projectGrid">
+          <p class="data-status" id="projectStatus">Memuat project…</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="container">
+        <div class="section-head reveal reveal-up">
+          <div class="eyebrow">Pengalaman</div>
+          <h2>Ringkasan pengalaman kerja</h2>
+          <p>Jejak pengalaman yang menunjukkan bagaimana saya menerapkan keterampilan teknis untuk menghasilkan solusi
+            yang berdampak.</p>
+        </div>
+        <div class="timeline" id="timelineList">
+          <p class="data-status" id="experienceStatus">Memuat pengalaman…</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="achievements">
+      <div class="container">
+        <div class="section-head reveal reveal-up">
+          <div class="eyebrow">Pencapaian</div>
+          <h2>Penghargaan &amp; Kompetisi</h2>
+          <p>Daftar pencapaian yang telah saya raih.</p>
+        </div>
+        <div class="achievement-grid" id="achievementList">
+          <p class="data-status">Memuat pencapaian…</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="certificates">
+      <div class="container">
+        <div class="section-head reveal reveal-up">
+          <div class="eyebrow">Sertifikat</div>
+          <h2>Sertifikasi & Pelatihan</h2>
+        </div>
+        <div class="cert-grid">
+          <div class="premium-card reveal reveal-up" data-cert="Full-Stack Web Development"
+            data-issuer="Dicoding — 2024">
+            <div class="premium-img-wrapper">
+              <div class="cert-icon-fallback">📄</div>
+            </div>
+            <div class="premium-info">
+              <div class="premium-icon-circle">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                  <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                </svg>
+              </div>
+              <div class="premium-text-col">
+                <h3 class="premium-title">Full-Stack Web Development</h3>
+                <span class="premium-issuer">Dicoding · 2024</span>
+              </div>
+              <div class="premium-action">Lihat Detail &rarr;</div>
+            </div>
+          </div>
+          <div class="premium-card reveal reveal-up" data-cert="React Advanced Patterns" data-issuer="Udemy — 2023">
+            <div class="premium-img-wrapper">
+              <div class="cert-icon-fallback">📄</div>
+            </div>
+            <div class="premium-info">
+              <div class="premium-icon-circle">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                  <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                </svg>
+              </div>
+              <div class="premium-text-col">
+                <h3 class="premium-title">React Advanced Patterns</h3>
+                <span class="premium-issuer">Udemy · 2023</span>
+              </div>
+              <div class="premium-action">Lihat Detail &rarr;</div>
+            </div>
+          </div>
+          <div class="premium-card reveal reveal-up" data-cert="UI/UX Design Fundamentals"
+            data-issuer="Coursera — 2022">
+            <div class="premium-img-wrapper">
+              <div class="cert-icon-fallback">📄</div>
+            </div>
+            <div class="premium-info">
+              <div class="premium-icon-circle">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                  <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                </svg>
+              </div>
+              <div class="premium-text-col">
+                <h3 class="premium-title">UI/UX Design Fundamentals</h3>
+                <span class="premium-issuer">Coursera · 2022</span>
+              </div>
+              <div class="premium-action">Lihat Detail &rarr;</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-head reveal reveal-up">
+          <div class="eyebrow">Hubungi Saya</div>
+          <h2>Mari Bangun Sesuatu yang Berdampak</h2>
+        </div>
+
+        <!-- Progress Dots -->
+        <div class="contact-progress reveal reveal-up">
+          <div class="progress-line"></div>
+          <div class="progress-dot"></div>
+        </div>
+
+        <div class="contact-card-v2 glass reveal reveal-up">
+          <div class="contact-v2-grid">
+            <!-- Left: CTA / Illustration -->
+            <div class="contact-v2-left">
+              <div class="contact-illustration">
+                <div class="contact-icon-circle">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13" />
+                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                  </svg>
+                </div>
+                <!-- Decorative Sparkles -->
+                <div class="sparkle sparkle-1">✦</div>
+                <div class="sparkle sparkle-2">✦</div>
+                <div class="sparkle sparkle-3">·</div>
+                <div class="sparkle sparkle-4">✦</div>
+              </div>
+              <h3 class="contact-cta-title">Saya terbuka untuk<br><span class="cta-highlight">kolaborasi</span> menarik!
+              </h3>
+              <p class="contact-cta-desc">Baik itu project freelance, kerja sama, atau sekadar ngobrol tentang ide, saya
+                siap terhubung.</p>
+              <div class="contact-cta-line"></div>
+            </div>
+
+            <!-- Right: Form -->
+            <div class="contact-v2-right">
+              <form id="contactForm">
+                <div class="field-v2">
+                  <label for="name">Nama</label>
+                  <div class="input-wrapper">
+                    <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                      <circle cx="12" cy="7" r="4" />
+                    </svg>
+                    <input type="text" id="name" placeholder="Nama lengkap Anda" required>
+                  </div>
+                </div>
+                <div class="field-v2">
+                  <label for="email">Email</label>
+                  <div class="input-wrapper">
+                    <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="2" y="4" width="20" height="16" rx="2" />
+                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                    </svg>
+                    <input type="email" id="email" placeholder="nama@email.com" required>
+                  </div>
+                </div>
+                <div class="field-v2">
+                  <label for="message">Pesan</label>
+                  <textarea id="message" placeholder="Ceritakan sedikit tentang project Anda" required></textarea>
+                </div>
+                <button type="submit" class="btn-send-v2">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13" />
+                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                  </svg>
+                  Kirim Pesan
+                </button>
+              </form>
+              <div class="success-box" id="successBox">
+                <div class="success-icon">✓</div>
+                <h3 style="margin-bottom:6px;">Pesan terkirim</h3>
+                <p style="color:var(--t-secondary);font-size:14px;">Terima kasih, saya akan membalas secepatnya.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer-v3 container">
+    <div class="footer-v3-glass">
+
+      <!-- Left Column: Profile -->
+      <div class="footer-v3-col footer-col-left">
+        <div class="footer-v3-avatar-ring">
+          <div class="footer-avatar" id="footerAvatar">B</div>
+        </div>
+        <div class="footer-v3-profile-text">
+          <span class="footer-v3-name" id="footerText">© 2026 Baso Ummul Ikshan.</span>
+          <span class="footer-v3-role footer-role">Full-Stack Developer</span>
+        </div>
+      </div>
+
+      <!-- Right Column: Socials & Back to Top -->
+      <div class="footer-v3-col footer-col-right">
+        <div class="footer-v3-socials" id="footerSocials">
+          <!-- Populated by main.js -->
+        </div>
+        <a href="#" class="footer-v3-back-to-top" aria-label="Kembali ke atas" style="margin-left: 20px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-inner glass">
+      <button class="lightbox-close" id="lightboxClose">✕</button>
+      <h3 id="lightboxTitle" style="font-size:22px;margin-bottom:8px;"></h3>
+      <p id="lightboxIssuer" style="font-size:14px; margin-bottom: 24px; opacity: 0.8;"></p>
+      <div id="lightboxImage"></div>
+    </div>
+  </div>
+
+  <div class="project-modal" id="projectModal">
+    <div class="project-modal-inner">
+      <button class="pm-close" id="pmClose">✕</button>
+      <button class="pm-toggle-info" id="pmToggleInfo">Detail</button>
+      <div class="pm-main-image" id="pmMainImage"></div>
+      <div class="pm-overlay" id="pmOverlay"></div>
+      <div class="pm-content" id="pmContent">
+        <div class="pm-bottom-row">
+          <div class="pm-info-col" id="pmInfoCol">
+            <h2 id="pmTitle"></h2>
+            <a href="#" target="_blank" rel="noopener" id="pmLink" style="display:none;">
+
+            </a>
+            <p id="pmDesc"></p>
+            <div class="tag-row" id="pmTags"></div>
+          </div>
+          <div class="pm-thumbs-wrapper" id="pmThumbsWrapper"
+            style="display: flex; align-items: center; gap: 8px; width: 45%; justify-content: flex-end;">
+            <button class="pm-thumb-nav prev" id="pmThumbPrev">‹</button>
+            <div class="pm-thumbs" id="pmThumbs" style="width: auto; max-width: 100%;"></div>
+            <button class="pm-thumb-nav next" id="pmThumbNext">›</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Achievement Modal with Cover Flow -->
+  <div class="achievement-modal" id="achievementModal">
+    <button class="am-close" id="amClose">✕</button>
+    <div class="am-cover-flow-container">
+      <div class="am-cover-flow" id="amCoverFlow">
+        <!-- Cover flow cards will be injected here via JS -->
+      </div>
+    </div>
+    <div class="am-info" id="amInfo">
+      <h2 id="amTitle"></h2>
+      <div class="am-meta" id="amMeta"></div>
+      <p id="amDesc"></p>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+
+</html>

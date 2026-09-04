@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<div class="wrap">
+
+  <div id="loginView" class="glass card">
+    <h1>Admin Portfolio</h1>
+    <p class="sub">Masuk untuk mengelola project dan pengalaman</p>
+    <form id="loginForm">
+      <div class="field">
+        <label for="loginEmail">Email</label>
+        <input type="email" id="loginEmail" required>
+      </div>
+      <div class="field">
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" required>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%;">Masuk</button>
+      <p class="login-error" id="loginError">Email atau password salah.</p>
+    </form>
+  </div>
+
+  <div id="appView">
+    <div class="topbar">
+      <div>
+        <h1>Kelola Portfolio</h1>
+        <p class="sub" id="userEmail"></p>
+      </div>
+      <button class="btn btn-ghost" id="logoutBtn">Keluar</button>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="projects">Project</button>
+      <button class="tab-btn" data-tab="experiences">Pengalaman</button>
+      <button class="tab-btn" data-tab="certificates">Sertifikat</button>
+      <button class="tab-btn" data-tab="achievements">Pencapaian</button>
+      <button class="tab-btn" data-tab="profile">Profil</button>
+    </div>
+
+    <div id="tab-projects">
+      <div class="glass card" style="margin-bottom:24px;">
+        <h3 style="margin-bottom:16px;">Tambah project baru</h3>
+        <form id="projectForm">
+          <input type="hidden" id="projectId">
+          <div class="field"><label>Judul</label><input type="text" id="pTitle" required></div>
+          <div class="field"><label>Deskripsi singkat</label><textarea id="pDescription" required></textarea></div>
+          <div class="field"><label>Tag teknologi</label><input type="text" id="pTags" placeholder="React, Node.js, PostgreSQL"><small>Pisahkan dengan koma</small></div>
+          <div class="field">
+            <label>Gambar Project (Pilih satu atau lebih)</label>
+            <input type="file" id="pThumbnail" multiple accept="image/*">
+            <small>Memilih file akan menambahkannya ke daftar gambar. Anda bisa mengurutkan ulang di bawah.</small>
+          </div>
+          <div id="pThumbnailPreview" class="image-preview-list"></div>
+          <div class="field"><label>Link project (opsional)</label><input type="text" id="pLink" placeholder="https://..."></div>
+          <div class="field"><label>Urutan tampil</label><input type="number" id="pOrder" value="0"></div>
+          <div class="row">
+            <button type="submit" class="btn btn-primary">Simpan Project</button>
+            <button type="button" class="btn btn-ghost" id="pCancelEdit" style="display:none;">Batal Edit</button>
+          </div>
+        </form>
+      </div>
+      <div id="projectList"></div>
+    </div>
+
+    <div id="tab-experiences" style="display:none;">
+      <div class="glass card" style="margin-bottom:24px;">
+        <h3 style="margin-bottom:16px;">Tambah pengalaman baru</h3>
+        <form id="experienceForm">
+          <input type="hidden" id="experienceId">
+          <div class="field"><label>Posisi</label><input type="text" id="ePosition" required></div>
+          <div class="field"><label>Perusahaan</label><input type="text" id="eCompany" required></div>
+          <div class="field"><label>Periode</label><input type="text" id="ePeriod" placeholder="2023 — Sekarang" required></div>
+          <div class="field"><label>Pencapaian</label><textarea id="eAchievements" placeholder="Satu poin per baris"></textarea><small>Satu baris = satu poin</small></div>
+          <div class="field"><label>Urutan tampil</label><input type="number" id="eOrder" value="0"></div>
+          <div class="row">
+            <button type="submit" class="btn btn-primary">Simpan Pengalaman</button>
+            <button type="button" class="btn btn-ghost" id="eCancelEdit" style="display:none;">Batal Edit</button>
+          </div>
+        </form>
+      </div>
+      <div id="experienceList"></div>
+    </div>
+
+    <div id="tab-certificates" style="display:none;">
+      <div class="glass card" style="margin-bottom:24px;">
+        <h3 style="margin-bottom:16px;">Tambah sertifikat baru</h3>
+        <form id="certificateForm">
+          <input type="hidden" id="certificateId">
+          <div class="field"><label>Judul Sertifikat</label><input type="text" id="cTitle" required></div>
+          <div class="field"><label>Penerbit / Tahun</label><input type="text" id="cIssuer" required placeholder="Contoh: Dicoding — 2024"></div>
+          <div class="field"><label>Gambar Sertifikat (Opsional)</label><input type="file" id="cImage" accept="image/*"><small id="cImageHint"></small></div>
+          <div class="field"><label>Urutan tampil</label><input type="number" id="cOrder" value="0"></div>
+          <div class="row">
+            <button type="submit" class="btn btn-primary">Simpan Sertifikat</button>
+            <button type="button" class="btn btn-ghost" id="cCancelEdit" style="display:none;">Batal Edit</button>
+          </div>
+        </form>
+      </div>
+      <div id="certificateList"></div>
+    </div>
+
+    <div id="tab-achievements" style="display:none;">
+      <div class="glass card" style="margin-bottom:24px;">
+        <h3 style="margin-bottom:16px;">Tambah pencapaian baru</h3>
+        <form id="achievementForm">
+          <input type="hidden" id="achievementId">
+          <div class="field"><label>Judul Pencapaian</label><input type="text" id="aTitle" required></div>
+          <div class="field"><label>Penyelenggara / Institusi</label><input type="text" id="aIssuer" required></div>
+          <div class="field"><label>Tanggal / Tahun</label><input type="text" id="aDate" required placeholder="Contoh: Agustus 2024"></div>
+          <div class="field"><label>Deskripsi (Opsional)</label><textarea id="aDescription" placeholder="Jelaskan pencapaian ini secara singkat"></textarea></div>
+          <div class="field">
+            <label>Gambar Pencapaian (Pilih maksimal 5)</label>
+            <input type="file" id="aImage" multiple accept="image/*">
+            <small>Memilih file akan menambahkannya ke daftar gambar. Anda bisa mengurutkan ulang di bawah.</small>
+          </div>
+          <div id="aThumbnailPreview" class="image-preview-list"></div>
+          <div class="field"><label>Urutan tampil</label><input type="number" id="aOrder" value="0"></div>
+          <div class="row">
+            <button type="submit" class="btn btn-primary">Simpan Pencapaian</button>
+            <button type="button" class="btn btn-ghost" id="aCancelEdit" style="display:none;">Batal Edit</button>
+          </div>
+        </form>
+      </div>
+      <div id="achievementList"></div>
+    </div>
+
+    <div id="tab-profile" style="display:none;">
+      <div class="glass card" style="margin-bottom:24px;">
+        <h3 style="margin-bottom:16px;">Pengaturan Profil</h3>
+        <form id="profileForm">
+          <input type="hidden" id="profileId">
+          <div class="field"><label>Nama Lengkap</label><input type="text" id="prName" required></div>
+          <div class="field"><label>Role / Posisi</label><input type="text" id="prRole" required></div>
+          <div class="field"><label>Foto Profil (Avatar)</label><input type="file" id="prAvatar" accept="image/*"><small id="prAvatarHint"></small></div>
+          <div class="field"><label>File CV (PDF)</label><input type="file" id="prCv" accept=".pdf"><small id="prCvHint"></small></div>
+          <div class="field"><label>Bio Singkat (Ditampilkan di bagian paling atas/Hero)</label><textarea id="prBioShort" style="min-height:60px;" required></textarea></div>
+          <div class="field"><label>Bio Lengkap (Ditampilkan di bagian Tentang Saya)</label><textarea id="prBioLong" required></textarea></div>
+          <div class="field"><label>Email Kontak</label><input type="email" id="prEmail"></div>
+          <div class="field"><label>URL GitHub</label><input type="text" id="prGithub"></div>
+          <div class="field"><label>URL LinkedIn</label><input type="text" id="prLinkedin"></div>
+          <div class="field"><label>URL WhatsApp / Kontak Lain</label><input type="text" id="prWhatsapp"></div>
+          <div class="row">
+            <button type="submit" class="btn btn-primary">Simpan Profil</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/admin.js"></script>
+
+</body>
+</html>
