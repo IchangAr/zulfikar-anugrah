@@ -101,7 +101,7 @@ const AdminProjects = () => {
         description: project.description || '',
         thumbnail_url: project.thumbnail_url || '',
         image_urls: project.image_urls ? [...project.image_urls] : [],
-        link: project.link || '',
+        link: project.project_link || '',
         github_url: project.github_url || '',
         tags: project.tags ? project.tags.join(', ') : '',
         sort_order: project.sort_order || 0
@@ -132,9 +132,11 @@ const AdminProjects = () => {
     e.preventDefault();
     setSaving(true);
     
-    // Parse arrays
+    // Parse arrays and map link to project_link
+    const { link, ...restFormData } = formData;
     const parsedData = {
-      ...formData,
+      ...restFormData,
+      project_link: link,
       image_urls: formData.image_urls,
       tags: formData.tags ? formData.tags.split(',').map(s => s.trim()).filter(Boolean) : [],
       sort_order: parseInt(formData.sort_order, 10) || 0
