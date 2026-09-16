@@ -5,7 +5,7 @@ import { useProfile } from '../../hooks/useProfile';
 
 const About = () => {
   const { profile, loading } = useProfile();
-  
+
   const name = profile?.full_name || "Baso Ummul Ikshan.";
   const role = profile?.role || "Fresh Graduate Informatika";
   const bioLong = profile?.bio_long ? profile.bio_long.split('\n').filter(p => p.trim()) : [
@@ -18,8 +18,8 @@ const About = () => {
       <div className="container">
         <div className="about-v2">
           {/* Centered Greeting Badge */}
-          <motion.div 
-            className="section-head" 
+          <motion.div
+            className="section-head"
             style={{ marginBottom: 0 }}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -33,7 +33,7 @@ const About = () => {
 
           {/* Top Row: Left Bio + Right Principle */}
           <div className="about-v2-top">
-            <motion.div 
+            <motion.div
               className="about-v2-left"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -49,17 +49,17 @@ const About = () => {
               </div>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               className="about-v2-right"
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6 }}
             >
-              <motion.div 
+              <motion.div
                 className="principle-card-v2 glass"
-                whileHover={{ 
-                  scale: 1.02, 
+                whileHover={{
+                  scale: 1.02,
                   y: -5,
                   boxShadow: "0 20px 40px -10px rgba(99, 102, 241, 0.15)"
                 }}
@@ -85,7 +85,7 @@ const About = () => {
           </div>
 
           {/* Credential Chips */}
-          <motion.div 
+          <motion.div
             className="about-v2-credentials"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -94,15 +94,7 @@ const About = () => {
           >
             <motion.div className="credential-chip glass" whileHover={{ y: -2 }}>
               <span className="credential-icon">🎓</span>
-              <span>Universitas Muslim Indonesia • IPK 3.95</span>
-            </motion.div>
-            <motion.div className="credential-chip glass" whileHover={{ y: -2 }}>
-              <span className="credential-icon">🚀</span>
-              <span>Bangkit Academy Graduate</span>
-            </motion.div>
-            <motion.div className="credential-chip glass" whileHover={{ y: -2 }}>
-              <span className="credential-icon">🏅</span>
-              <span>BNSP Associate Data Scientist</span>
+              <span>Universitas Muslim Indonesia • IPK 3.91</span>
             </motion.div>
           </motion.div>
 
