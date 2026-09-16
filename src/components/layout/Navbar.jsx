@@ -24,7 +24,7 @@ const Navbar = () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
         >
-          <img src="/Logo Iccank.png" alt="Iccank Logo" style={{ height: '5.5em', verticalAlign: 'middle', margin: '-1.5em 0', transform: 'scale(1.3)' }} />
+          <img src="/Logo zul.png" alt="Zul Logo" style={{ height: '5.5em', verticalAlign: 'middle', margin: '-1.5em 0', transform: 'scale(1.3)' }} />
         </a>
         <ul id="mobile-navigation" className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
           <li><a href="#about" onClick={() => setIsMenuOpen(false)}>Tentang</a></li>

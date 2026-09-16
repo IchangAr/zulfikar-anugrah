@@ -177,6 +177,26 @@ function Band({ maxSpeed = 50, minSpeed = 10, anchor = [2.6, 2.6, 0], frontImage
     composite.needsUpdate = true;
     return composite;
   }, [frontImage, backImage, imageFit, frontTex, backTex, materials.base.map]);
+
+  const lanyardMap = useMemo(() => {
+    if (!texture || !texture.image) return texture;
+    const img = texture.image;
+    const canvas = document.createElement('canvas');
+    canvas.width = img.width;
+    canvas.height = img.height;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return texture;
+    ctx.fillStyle = 'black';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0);
+    const newTex = new THREE.CanvasTexture(canvas);
+    newTex.wrapS = THREE.RepeatWrapping;
+    newTex.wrapT = THREE.RepeatWrapping;
+    newTex.colorSpace = THREE.SRGBColorSpace;
+    newTex.needsUpdate = true;
+    return newTex;
+  }, [texture, texture?.image]);
+
   const [curve] = useState(
     () =>
       new THREE.CatmullRomCurve3([new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()])
@@ -330,8 +350,8 @@ function Band({ maxSpeed = 50, minSpeed = 10, anchor = [2.6, 2.6, 0], frontImage
           color="white"
           depthTest={false}
           resolution={isMobile ? [1000, 2000] : [1000, 1000]}
-          useMap
-          map={texture}
+          useMap={true}
+          map={lanyardMap}
           repeat={[-4, 1]}
           lineWidth={lanyardWidth}
         />
