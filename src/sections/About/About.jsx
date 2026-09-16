@@ -77,8 +77,7 @@ const About = () => {
                 </div>
                 <div className="principle-quote-v2">
                   <span className="quote-mark quote-open">"</span>
-                  <p>Saya percaya perangkat lunak yang baik bukan hanya berfungsi dengan benar, tetapi juga mudah
-                    dipelajari, mudah dipelihara, dan memberikan nilai nyata bagi penggunanya.</p>
+                  <p>Saya percaya, setiap pekerjaan selalu punya sesuatu untuk dipelajari. Tidak harus langsung bisa semuanya, yang penting mau mencoba, mau belajar, dan bertanggung jawab dengan apa yang sudah dimulai.</p>
                   <span className="quote-mark quote-close">"</span>
                 </div>
               </motion.div>
