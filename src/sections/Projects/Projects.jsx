@@ -106,9 +106,19 @@ const ProjectCardItem = ({ project, index, total, onClick }) => {
           
           return images.length > 0 ? (
             <div className="project-slider">
-              {images.map((img, i) => (
-                <div key={i} className="project-slide" style={{ backgroundImage: `url('${img}')` }}></div>
-              ))}
+              {images.map((img, i) => {
+                const isVideo = img.match(/\.(mp4|webm|ogg)$/i);
+                if (isVideo) {
+                  return (
+                    <div key={i} className="project-slide">
+                      <video src={img} autoPlay loop muted playsInline style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    </div>
+                  );
+                }
+                return (
+                  <div key={i} className="project-slide" style={{ backgroundImage: `url('${img}')` }}></div>
+                );
+              })}
             </div>
           ) : (
             <div className="project-slide" style={{ background: 'var(--c-primary)' }}></div>

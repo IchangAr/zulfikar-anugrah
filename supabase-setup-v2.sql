@@ -64,6 +64,11 @@ create policy "auth manage messages" on messages
   for all using (auth.role() = 'authenticated' and user_id = auth.uid())
   with check (auth.role() = 'authenticated' and user_id = auth.uid());
 
+-- Siapa saja boleh mengirim pesan (insert) — untuk pengunjung portfolio
+drop policy if exists "public insert messages" on messages;
+create policy "public insert messages" on messages
+  for insert with check (true);
+
 -- 5. Update data lama (Jika ada)
 -- Skrip ini akan mengaitkan data lama yang user_id nya null ke user pertama yang ada di tabel auth.users
 DO $$

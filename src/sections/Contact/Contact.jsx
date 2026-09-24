@@ -18,6 +18,7 @@ const Contact = () => {
     const email = e.target.email.value;
     const message = e.target.message.value;
 
+    // 1. Simpan ke Supabase
     const { error } = await supabase
       .from('messages')
       .insert([
@@ -28,6 +29,30 @@ const Contact = () => {
           user_id: profile.user_id
         }
       ]);
+
+    // 2. Kirim ke Email via Web3Forms (Jika ada key)
+    const web3formsKey = import.meta.env.VITE_WEB3FORMS_KEY;
+    if (web3formsKey && !error) {
+      try {
+        await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            access_key: web3formsKey,
+            name: name,
+            email: email,
+            message: message,
+            subject: `Pesan baru dari ${name} di Portofolio!`,
+            from_name: "Portofolio Contact Form"
+          }),
+        });
+      } catch (err) {
+        console.error("Gagal mengirim email via Web3Forms:", err);
+      }
+    }
 
     setLoading(false);
     if (!error) {

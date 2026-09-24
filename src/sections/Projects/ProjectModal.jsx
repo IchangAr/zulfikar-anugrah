@@ -55,9 +55,20 @@ const ProjectModal = ({ project, onClose }) => {
         {/* We removed the old toggle button since we will place it on the left now */}
         
         <div className="pm-main-image" id="pmMainImage" style={{ 
-          backgroundImage: images.length > 0 ? `url(${images[currentImageIndex]})` : 'none',
+          backgroundImage: (images.length > 0 && !images[currentImageIndex].match(/\.(mp4|webm|ogg)$/i)) ? `url(${images[currentImageIndex]})` : 'none',
           backgroundColor: images.length === 0 ? 'var(--c-primary)' : 'transparent'
-        }}></div>
+        }}>
+          {images.length > 0 && images[currentImageIndex].match(/\.(mp4|webm|ogg)$/i) && (
+            <video 
+              src={images[currentImageIndex]} 
+              autoPlay 
+              loop 
+              muted 
+              playsInline 
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+            />
+          )}
+        </div>
         
         <div className={`pm-overlay ${!showInfo ? 'info-hidden' : ''}`} id="pmOverlay"></div>
         
@@ -90,14 +101,19 @@ const ProjectModal = ({ project, onClose }) => {
               <div className="pm-thumbs-wrapper" id="pmThumbsWrapper" style={{ display: 'flex', alignItems: 'center', gap: '8px', width: '45%', justifyContent: 'flex-end' }}>
                 <button className="pm-thumb-nav prev" onClick={() => setCurrentImageIndex(prev => prev > 0 ? prev - 1 : images.length - 1)}>‹</button>
                 <div className="pm-thumbs" id="pmThumbs" style={{ width: 'auto', maxWidth: '100%' }}>
-                  {images.map((img, i) => (
-                    <div 
-                      key={i} 
-                      className={`pm-thumb ${i === currentImageIndex ? 'active' : ''}`} 
-                      style={{ backgroundImage: `url(${img})` }}
-                      onClick={() => setCurrentImageIndex(i)}
-                    ></div>
-                  ))}
+                  {images.map((img, i) => {
+                    const isVideo = img.match(/\.(mp4|webm|ogg)$/i);
+                    return (
+                      <div 
+                        key={i} 
+                        className={`pm-thumb ${i === currentImageIndex ? 'active' : ''}`} 
+                        style={isVideo ? {} : { backgroundImage: `url(${img})` }}
+                        onClick={() => setCurrentImageIndex(i)}
+                      >
+                        {isVideo && <video src={img} style={{ width: '100%', height: '100%', objectFit: 'cover' }} muted playsInline />}
+                      </div>
+                    );
+                  })}
                 </div>
                 <button className="pm-thumb-nav next" onClick={() => setCurrentImageIndex(prev => prev < images.length - 1 ? prev + 1 : 0)}>›</button>
               </div>

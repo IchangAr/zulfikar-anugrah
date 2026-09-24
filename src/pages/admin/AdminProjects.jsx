@@ -260,7 +260,11 @@ const AdminProjects = () => {
                 {/* Thumbnail */}
                 <div className="flex-shrink-0 w-20 h-20 rounded-xl overflow-hidden bg-white/80 border border-slate-200/60 flex items-center justify-center shadow-inner">
                   {project.thumbnail_url ? (
-                    <img src={project.thumbnail_url} alt={project.title} className="w-full h-full object-cover" draggable={false} />
+                    project.thumbnail_url.match(/\.(mp4|webm|ogg)$/i) ? (
+                      <video src={project.thumbnail_url} className="w-full h-full object-cover" muted draggable={false} />
+                    ) : (
+                      <img src={project.thumbnail_url} alt={project.title} className="w-full h-full object-cover" draggable={false} />
+                    )
                   ) : (
                     <span className="text-xs font-semibold text-slate-400">NO IMG</span>
                   )}
@@ -330,7 +334,7 @@ const AdminProjects = () => {
                     <div className="flex flex-col gap-2">
                       <input type="text" name="thumbnail_url" value={formData.thumbnail_url} onChange={handleInputChange} placeholder="https://... atau pilih file di bawah" className="w-full p-3 rounded-lg bg-white/50 border-slate-300/50 text-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none transition-all" />
                       <div className="flex items-center gap-2">
-                        <input type="file" accept="image/*" onChange={handleThumbnailUpload} disabled={uploadingThumbnail} className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-all" />
+                        <input type="file" accept="image/*,video/*" onChange={handleThumbnailUpload} disabled={uploadingThumbnail} className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-all" />
                         {uploadingThumbnail && <span className="text-xs text-blue-500 whitespace-nowrap animate-pulse">Mengunggah...</span>}
                       </div>
                     </div>
@@ -358,7 +362,11 @@ const AdminProjects = () => {
                           value={url}
                           className="relative w-24 h-24 rounded-lg overflow-hidden border border-slate-300/50 group cursor-grab active:cursor-grabbing"
                         >
-                          <img src={url} alt={`Gallery ${idx}`} className="w-full h-full object-cover pointer-events-none" />
+                          {url.match(/\.(mp4|webm|ogg)$/i) ? (
+                            <video src={url} className="w-full h-full object-cover pointer-events-none" muted />
+                          ) : (
+                            <img src={url} alt={`Gallery ${idx}`} className="w-full h-full object-cover pointer-events-none" />
+                          )}
                           <button
                             type="button"
                             onClick={() => setFormData(prev => ({ ...prev, image_urls: prev.image_urls.filter((_, i) => i !== idx) }))}
@@ -402,7 +410,7 @@ const AdminProjects = () => {
                         ) : (
                            <>+ Upload File</>
                         )}
-                        <input type="file" accept="image/*" className="hidden" onChange={handleGalleryUpload} disabled={uploadingGallery} />
+                        <input type="file" accept="image/*,video/*" className="hidden" onChange={handleGalleryUpload} disabled={uploadingGallery} />
                       </label>
                     </div>
                   </div>
