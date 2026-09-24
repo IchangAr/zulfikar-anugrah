@@ -9,6 +9,7 @@ const AdminCertificates = () => {
   const [editingId, setEditingId] = useState(null);
   const [saving, setSaving] = useState(false);
   const [savingOrder, setSavingOrder] = useState(false);
+  const [uploading, setUploading] = useState(false);
 
   // Form State
   const [formData, setFormData] = useState({
@@ -48,6 +49,38 @@ const AdminCertificates = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    try {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `cert-${Date.now()}.${fileExt}`;
+      const filePath = `${fileName}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('portfolio')
+        .upload(filePath, file);
+
+      if (uploadError) {
+        throw uploadError;
+      }
+
+      const { data } = supabase.storage
+        .from('portfolio')
+        .getPublicUrl(filePath);
+
+      setFormData(prev => ({ ...prev, image_url: data.publicUrl }));
+      alert('File berhasil diunggah!');
+    } catch (error) {
+      alert('Gagal mengunggah file: ' + error.message);
+      console.error(error);
+    } finally {
+      setUploading(false);
+    }
   };
 
   const openModal = (cert = null) => {
@@ -286,8 +319,37 @@ const AdminCertificates = () => {
                 </div>
 
                 <div>
-                  <label className="block mb-2 text-sm font-medium text-slate-700">Image / PDF URL</label>
-                  <input type="text" name="image_url" value={formData.image_url} onChange={handleInputChange} placeholder="https://... (URL gambar sertifikat atau file PDF)" className="w-full p-3 rounded-lg bg-white/50 border-slate-300/50 text-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none transition-all" />
+                  <label className="block mb-2 text-sm font-medium text-slate-700">Image / PDF Sertifikat</label>
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <input type="text" name="image_url" value={formData.image_url} onChange={handleInputChange} placeholder="https://... (URL file PDF/Gambar)" className="w-full p-3 rounded-lg bg-white/50 border border-slate-300/50 text-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none transition-all" />
+                    <div className="relative flex-shrink-0">
+                      <input 
+                        type="file" 
+                        accept="image/*,application/pdf"
+                        onChange={handleImageUpload} 
+                        disabled={uploading}
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer disabled:cursor-not-allowed" 
+                        title="Upload File"
+                      />
+                      <button 
+                        type="button" 
+                        disabled={uploading}
+                        className="w-full sm:w-auto px-4 py-3 bg-blue-50 hover:bg-blue-100 text-blue-600 border border-blue-200 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 whitespace-nowrap disabled:opacity-50"
+                      >
+                        {uploading ? (
+                          <>
+                            <svg className="animate-spin h-4 w-4 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                            Mengunggah...
+                          </>
+                        ) : (
+                          <>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                            Upload File
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  </div>
                 </div>
 
                 <div className="flex justify-end gap-3 mt-4 pt-6 border-t border-slate-200">

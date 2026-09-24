@@ -60,6 +60,7 @@ create table if not exists certificates (
   id uuid primary key default gen_random_uuid(),
   title text not null,
   issuer text not null,
+  year text,
   image_url text,
   sort_order int default 0,
   created_at timestamptz default now()
